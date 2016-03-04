@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">DennysClone</string>
+    <string name="home">ホーム</string>
+    <string name="menu">メニュー</string>
+    <string name="coupon">クーポン</string>
+    <string name="net_service">ネットサービス</string>
+    <string name="navi">ナビ</string>
+    <string name="default_font_family">sans-serif-light</string>
+
+    <string name="news">お知らせ</string>
+    <string name="pull_label">画面を引っ張って</string>
+    <string name="refresh_label">読み込み中</string>
+    <string name="release_label">読み込み完了</string>
+</resources>

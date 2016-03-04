@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorWhiteTransparent">#AAFFFFFF</color>
+    <color name="colorPrimaryDark">#ffe699</color>
+    <color name="colorPrimaryDarkTransparent">#aaffe699</color>
+    <color name="colorAccent">#e60000</color>
+    <color name="colorTitleBar">#ee0000</color>
+    <color name="colorTabNormal">#a3a375</color>
+    <color name="colorTabSelected">#ac7339</color>
+    <color name="colorTabDivider">#e6d7b3</color>
+    <color name="colorPink">#ff3399</color>
+</resources>

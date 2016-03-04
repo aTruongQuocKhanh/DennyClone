@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="jp.co.goga.dennysclone.MainActivity">
+
+    <FrameLayout
+        android:id="@+id/main_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tab_layout"/>
+
+    <com.flyco.tablayout.CommonTabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true"
+        tl:tl_iconGravity="TOP"
+        tl:tl_iconHeight="18dp"
+        tl:tl_iconMargin="5dp"
+        tl:tl_iconWidth="18dp"
+        tl:tl_indicator_bounce_enable="false"
+        tl:tl_indicator_color="@color/colorAccent"
+        tl:tl_indicator_gravity="TOP"
+        tl:tl_divider_color="@color/colorTabDivider"
+        tl:tl_divider_width="1dp"
+        tl:tl_divider_padding="0dp"
+        tl:tl_textSelectColor="@color/colorTabSelected"
+        tl:tl_textUnselectColor="@color/colorTabNormal"
+        tl:tl_textsize="10sp"
+        tl:tl_underline_color="@color/colorTabDivider"
+        tl:tl_underline_gravity="TOP"
+        tl:tl_underline_height="3dp"/>/>
+</RelativeLayout>
