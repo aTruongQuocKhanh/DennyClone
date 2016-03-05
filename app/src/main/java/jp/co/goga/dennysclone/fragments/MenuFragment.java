@@ -32,6 +32,12 @@ public class MenuFragment extends Fragment implements PullToRefreshBase.OnRefres
     private List<Object> mDataList = new ArrayList<>();
     private MenuAdapter mAdapter;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        loadData();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,7 +54,6 @@ public class MenuFragment extends Fragment implements PullToRefreshBase.OnRefres
         mRefreshListView = (PullToRefreshListView) mRootView.findViewById(R.id.pull_to_refresh_listview);
         mRefreshListView.setOnRefreshListener(this);
         mListMenuView = mRefreshListView.getRefreshableView();
-        loadData();
         mAdapter = new MenuAdapter(getContext(), mDataList);
         mListMenuView.setAdapter(mAdapter);
     }

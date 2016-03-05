@@ -1,6 +1,7 @@
 package jp.co.goga.dennysclone.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class MenuAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        Log.d("MenuAdapter", "getView position" + position);
         int viewType = getItemViewType(position);
         View mRootView = convertView;
         MenuHolder holder;
@@ -63,6 +65,7 @@ public class MenuAdapter extends BaseAdapter {
             }
             mRootView.setTag(holder);
         } else {
+            Log.d("MenuAdapter", "getView() tag id");
             holder = (MenuHolder) mRootView.getTag();
         }
         Object object = getItem(position);
@@ -82,9 +85,14 @@ public class MenuAdapter extends BaseAdapter {
         Object item = getItem(position);
         if (item instanceof String) {
             return ITEM_MENU_GROUP;
-        } else {
+        } else{
             return ITEM_MENU_ITEM;
         }
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return 2;
     }
 
     private class MenuHolder {
