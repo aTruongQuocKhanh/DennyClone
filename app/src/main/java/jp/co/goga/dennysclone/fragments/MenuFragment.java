@@ -18,6 +18,7 @@ import java.util.List;
 
 import jp.co.goga.dennysclone.R;
 import jp.co.goga.dennysclone.adapter.MenuAdapter;
+import jp.co.goga.dennysclone.handler.FragmentHandler;
 import jp.co.goga.dennysclone.util.Constant;
 
 /**
@@ -29,8 +30,13 @@ public class MenuFragment extends Fragment implements PullToRefreshBase.OnRefres
     private ListView mListMenuView;
 
     private Handler mHandler = new Handler();
-    private List<Object> mDataList = new ArrayList<>();
+    private List<Object> mDataList;
     private MenuAdapter mAdapter;
+    private FragmentHandler.OpenFragmentMethods mOpenFragmentListener;
+
+    public void setOpenFragmentListener(FragmentHandler.OpenFragmentMethods listener) {
+        mOpenFragmentListener = listener;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +65,7 @@ public class MenuFragment extends Fragment implements PullToRefreshBase.OnRefres
     }
 
     private void loadData() {
+        mDataList = new ArrayList<>();
         mDataList.add("FAIR MENU");
         mDataList.addAll(Arrays.asList(Constant.FAIR_MENU_ITEMS));
         mDataList.add("GRAND MENU");

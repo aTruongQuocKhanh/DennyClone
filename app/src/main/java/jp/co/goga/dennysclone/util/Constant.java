@@ -14,7 +14,7 @@ public class Constant {
     public static final int[] TAB_ICON_NORMAL = {
             R.drawable.home,
             R.drawable.menu,
-            R.drawable.home,
+            R.drawable.coupon,
             R.drawable.home,
             R.drawable.home,
     };
@@ -22,7 +22,7 @@ public class Constant {
     public static final int[] TAB_ICON_SELECTED = {
             R.drawable.home_selected,
             R.drawable.menu_selected,
-            R.drawable.home_selected,
+            R.drawable.coupon_selected,
             R.drawable.home_selected,
             R.drawable.home_selected,
     };
@@ -70,5 +70,18 @@ public class Constant {
             new DennyMenuItem("http://www.dennys.jp/images/menu/orange-juice-c.jpg","アルコール"),
             new DennyMenuItem("http://www.dennys.jp/images/menu/hamburger-and-crab-cream-croquette-c.jpg","平日ランチ限定メニュー"),
             new DennyMenuItem("http://www.dennys.jp/images/menu/chicken-and-croquette-c.jpg","日替わりランチ（平日限定)")
+    };
+
+    public static final String[] COUPON_IMAGE_URL = {
+            "http://www.dennys.jp/images/denimoba-club/denimoba-coupon/coupon_100off.png",
+            "http://www.dennys.jp/images/denimoba-club/denimoba-coupon/coupon_menu23.png",
+            "http://www.dennys.jp/images/denimoba-club/denimoba-coupon/coupon_menu20.png",
+            "http://www.dennys.jp/images/denimoba-club/denimoba-coupon/coupon_menu11.png",
+            "http://www.dennys.jp/images/denimoba-club/denimoba-coupon/coupon_menu12.png",
+            "http://www.dennys.jp/images/denimoba-club/denimoba-coupon/coupon_menu1.png",
+            "http://www.dennys.jp/images/denimoba-club/denimoba-coupon/coupon_100off.png",
+            "http://www.dennys.jp/images/denimoba-club/denimoba-coupon/coupon_menu3.png",
+            "http://www.dennys.jp/images/denimoba-club/denimoba-coupon/coupon_menu24.png",
+            "http://www.dennys.jp/images/denimoba-club/denimoba-coupon/coupon_menu25.png",
     };
 }

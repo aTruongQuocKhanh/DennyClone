@@ -11,4 +11,10 @@
     <string name="pull_label">画面を引っ張って</string>
     <string name="refresh_label">読み込み中</string>
     <string name="release_label">読み込み完了</string>
+
+    <string name="coupon_hint_message">お会計時に「クーポンを使う」ボタンで開封し、画面を店員にご提示ください。</string>
+    <string name="coupon_update">更新</string>
+    <string name="coupon_using_caution">ご利用上のご注意</string>
+    <string name="coupon_buy">クーポンを使う</string>
+    <string name="coupon_alert">掲載期間 2016年03月08日 06時59分</string>
 </resources>
