@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.co.goga.dennysclone.R;
+import jp.co.goga.dennysclone.handler.FragmentHandler;
 
 /**
  * Created by khanhtq on 3/7/16.
@@ -35,6 +36,11 @@ public class ImageCouponFragment extends Fragment implements View.OnClickListene
     private ImageView mCouponImage;
     private Button mCautionButton, mBuyCouponButton;
     private TextView mAlertTextView;
+    private FragmentHandler.OpenFragmentMethods mOpenFragmentListener;
+
+    public void setOpenFragmentListener(FragmentHandler.OpenFragmentMethods listener) {
+        mOpenFragmentListener = listener;
+    }
 
     private String mCouponUrl;
 
@@ -45,6 +51,7 @@ public class ImageCouponFragment extends Fragment implements View.OnClickListene
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView");
         mRootView = inflater.inflate(R.layout.fragment_image_coupon, container, false);
         return mRootView;
     }
@@ -52,6 +59,7 @@ public class ImageCouponFragment extends Fragment implements View.OnClickListene
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.d(TAG, "onActivityCreated");
         initView();
     }
 
@@ -62,11 +70,24 @@ public class ImageCouponFragment extends Fragment implements View.OnClickListene
         mAlertTextView = (TextView) mRootView.findViewById(R.id.coupon_alert_message);
 
         mAlertTextView.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.fade_alert_message));
+        Log.d(TAG, "mCouponUrl = " + mCouponUrl);
         if (mCouponUrl != null) {
             Picasso.with(getContext()).load(mCouponUrl).into(mCouponImage);
         }
         mBuyCouponButton.setOnClickListener(this);
         mCautionButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d(TAG, "onDestroyView");
     }
 
     @Override

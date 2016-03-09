@@ -1,23 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.AppBarLayout
+
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="@dimen/toolbar_height"
+    android:background="#fff">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/title_toolbar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/toolbar_height"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/header_devider">
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:visibility="visible"
+            android:src="@drawable/back"/>
 
         <TextView
             android:id="@+id/title_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@string/default_font_family"
+            android:gravity="center"
             android:textAllCaps="false"
             android:textColor="@color/colorTitleBar"
             android:textSize="@dimen/title_text_size"
-            android:textStyle="normal"
-            android:fontFamily="@string/default_font_family"/>
-    </android.support.v7.widget.Toolbar>
-</android.support.design.widget.AppBarLayout>
+            android:textStyle="normal"/>
+
+        <Button
+            android:id="@+id/acc_button"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/user"
+            android:text="@string/user"
+            android:textSize="@dimen/small_text_size"/>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/header_devider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryDark"/>
+</RelativeLayout>

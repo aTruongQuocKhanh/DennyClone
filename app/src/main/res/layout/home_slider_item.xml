@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="235dp"
+    android:layout_height="230dp"
     android:orientation="vertical">
 
     <com.daimajia.slider.library.SliderLayout
@@ -20,7 +20,6 @@
         android:id="@+id/custom_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
         android:gravity="center"
         android:layout_gravity="center_horizontal"
         custom:selected_color="#0095BF"

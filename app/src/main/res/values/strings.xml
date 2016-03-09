@@ -17,4 +17,9 @@
     <string name="coupon_using_caution">ご利用上のご注意</string>
     <string name="coupon_buy">クーポンを使う</string>
     <string name="coupon_alert">掲載期間 2016年03月08日 06時59分</string>
+
+    <string name="user">マイページ</string>
+    <string name="map">店舗検索</string>
+
+    <string name="google_maps_api_key">AIzaSyBFVEr3kESvLZfsDV65RjGWwb72_rJdLqE</string>
 </resources>

@@ -9,18 +9,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.squareup.picasso.Picasso;
 
-import java.util.HashMap;
 import java.util.List;
 
 import jp.co.goga.dennysclone.R;
-import jp.co.goga.dennysclone.fragments.MenuFragment;
+import jp.co.goga.dennysclone.fragments.DennysMenuFragment;
 import jp.co.goga.dennysclone.handler.FragmentHandler;
 import jp.co.goga.dennysclone.item.HomeNewsItem;
 import jp.co.goga.dennysclone.item.HomeSliderItem;
@@ -116,7 +113,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             @Override
                             public void onSliderClick(BaseSliderView slider) {
                                 if (mOpenFragmentListener != null) {
-                                    mOpenFragmentListener.openFragment(new MenuFragment(), false);
+                                    mOpenFragmentListener.openFragment(new DennysMenuFragment(), false);
                                 }
                             }
                         });

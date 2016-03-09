@@ -15,25 +15,17 @@ import jp.co.goga.dennysclone.fragments.ImageCouponFragment;
  */
 public class CouponAdapter extends FragmentStatePagerAdapter {
     private List<String> mImageUrls;
+    private List<Fragment> mFragments;
 
-    public CouponAdapter(FragmentManager fm, List<String> imageUrls) {
+    public CouponAdapter(FragmentManager fm, List<String> imageUrls, List<Fragment> fragments) {
         super(fm);
         mImageUrls = (imageUrls != null) ? imageUrls : new ArrayList<String>();
+        mFragments = (fragments != null) ? fragments : new ArrayList<Fragment>();
     }
 
     @Override
     public Fragment getItem(int position) {
-        Fragment fragment = null;
-        if (mImageUrls != null && position < mImageUrls.size()) {
-            fragment = loadImageFragment(mImageUrls.get(position));
-        }
-        return fragment;
-    }
-
-    private Fragment loadImageFragment(String url) {
-        ImageCouponFragment fragment = new ImageCouponFragment();
-        fragment.setCouponUrl(url);
-        return fragment;
+        return mFragments.get(position);
     }
 
     @Override

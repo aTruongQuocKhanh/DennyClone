@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingLeft="@dimen/activity_horizontal_padding"
+              android:paddingRight="@dimen/activity_horizontal_padding"
+              android:gravity="center_vertical">
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/option_icon_imageview"
+        android:scaleType="fitCenter"/>
+
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/option_switch"
+        android:text=""
+        android:textColor="@color/colorGray"
+        android:textSize="@dimen/default_text_size"/>
+</LinearLayout>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/map_search_box_width"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/map_search_layout_background"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_default_padding">
+
+    <RelativeLayout
+        android:id="@+id/search_tab"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/map_search_tab_height"
+        android:layout_marginBottom="@dimen/activity_default_padding"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorHalfGray"/>
+
+        <CheckedTextView
+            android:id="@+id/location_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/map_search_tab_background"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:selectAllOnFocus="true"
+            android:gravity="center"
+            android:padding="@dimen/activity_default_padding"
+            android:text="地名・駅名"
+            android:textColor="@color/tab_colors"/>
+
+        <CheckedTextView
+            android:id="@+id/store_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/location_tab"
+            android:background="@drawable/map_search_tab_background"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:padding="@dimen/activity_default_padding"
+            android:text="店名"
+            android:textColor="@color/tab_colors"/>
+
+        <TextView
+            android:id="@+id/map_search_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:padding="@dimen/activity_default_padding"
+            android:text="条件をリセット"
+            android:textColor="@color/colorDark"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/search_box"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/map_search_box_height"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/map_search_edittext"
+            style="@style/Base.Widget.AppCompat.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:background="@drawable/map_search_box_background"
+            android:gravity="center_vertical"
+            android:hint="@string/app_name"
+            android:padding="@dimen/activity_default_padding"
+            android:textAllCaps="false"
+            android:textSize="@dimen/default_text_size"/>
+
+        <ImageButton
+            android:id="@+id/map_search_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.75"
+            android:background="@color/colorDark"
+            android:scaleType="center"
+            android:src="@drawable/ic_search_white_24dp"/>
+
+        <ImageButton
+            android:id="@+id/map_search_expand_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/activity_default_padding"
+            android:layout_weight="0.8"
+            android:background="@android:color/transparent"
+            android:scaleType="center"
+            android:src="@drawable/ic_expand_less_black_24dp"/>
+    </LinearLayout>
+
+    <ExpandableListView
+        android:id="@+id/map_search_option_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_default_padding"
+        android:visibility="gone"/>
+
+</LinearLayout>

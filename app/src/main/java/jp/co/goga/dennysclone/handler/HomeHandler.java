@@ -2,9 +2,11 @@ package jp.co.goga.dennysclone.handler;
 
 import android.content.Context;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,11 +24,13 @@ import jp.co.goga.dennysclone.item.HomeRecyclerViewDevider;
 public class HomeHandler {
     private Context mContext;
     private View mRootView;
+    private Toolbar mToolbar;
     private RecyclerView mContentListView;
+    private SwipeRefreshLayout mRefreshLayout;
+
     private HomeAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     private HomeRecyclerViewDevider mDecorator;
-    private SwipeRefreshLayout mRefreshLayout;
     private Handler mHandler = new Handler();
 
     private SwipeRefreshLayout.OnRefreshListener mRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {

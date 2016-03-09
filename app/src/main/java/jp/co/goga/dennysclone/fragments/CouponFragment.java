@@ -22,21 +22,22 @@ import android.widget.LinearLayout;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import jp.co.goga.dennysclone.R;
 import jp.co.goga.dennysclone.adapter.CouponAdapter;
+import jp.co.goga.dennysclone.handler.FragmentHandler;
 import jp.co.goga.dennysclone.util.Constant;
 
 /**
  * Created by khanhtq on 3/7/16.
  */
-public class CouponFragment extends Fragment implements ViewPager.OnPageChangeListener, View.OnClickListener {
+public class CouponFragment extends BaseFragment implements ViewPager.OnPageChangeListener {
     public static final String TAG = CouponFragment.class.getSimpleName();
     private final int THUMBNAIL_SIZE = 200;
 
-    private View mRootView;
     private ViewPager mViewPager;
     private HorizontalScrollView mScrollView;
     private LinearLayout mScrollLayout;
@@ -45,29 +46,39 @@ public class CouponFragment extends Fragment implements ViewPager.OnPageChangeLi
     private int mCurrentPosition;
     private Point mDisplayProperties;
     private List<String> mListOfMedia;
+    private List<Fragment> mFragments;
     private CouponAdapter mAdapter;
     private final View.OnClickListener thumbnailOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             scroll(v);
             mViewPager.setCurrentItem((int) v.getTag(), true);
-            v.setSelected(true);
         }
     };
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return mRootView = inflater.inflate(R.layout.fragment_coupon, container, false);
+    protected int getLayoutId() {
+        return R.layout.fragment_coupon;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        initView();
+    protected boolean shouldShowBack() {
+        return false;
     }
 
-    private void initView() {
+    @Override
+    protected int getTitleId() {
+        return R.string.coupon;
+    }
+
+    @Override
+    protected String getTitle() {
+        return null;
+    }
+
+    @Override
+    protected void initView() {
+        Log.d(TAG, "initView() --- ");
         mViewPager = (ViewPager) mRootView.findViewById(R.id.coupon_viewpager);
         mScrollView = (HorizontalScrollView) mRootView.findViewById(R.id.coupon_scrollview);
         mScrollLayout = (LinearLayout) mRootView.findViewById(R.id.coupon_scroll_layout);
@@ -75,10 +86,13 @@ public class CouponFragment extends Fragment implements ViewPager.OnPageChangeLi
         mSwipeRightButton = (ImageView) mRootView.findViewById(R.id.swipe_right_button);
 
         mListOfMedia = Arrays.asList(Constant.COUPON_IMAGE_URL);
-        mAdapter = new CouponAdapter(getFragmentManager(), mListOfMedia);
+        loadFragments();
+        mAdapter = new CouponAdapter(getFragmentManager(), mListOfMedia, mFragments);
         mViewPager.setOnPageChangeListener(this);
         mViewPager.setAdapter(mAdapter);
         mViewPager.setCurrentItem(0);
+        mCurrentPosition = 0;
+        updateSwipeButtonState();
 
         mDisplayProperties = getDisplaySize();
         loadScrollViewContent();
@@ -87,10 +101,42 @@ public class CouponFragment extends Fragment implements ViewPager.OnPageChangeLi
         mSwipeLeftButton.setOnClickListener(this);
     }
 
+    @Override
+    protected void onViewClick(int id) {
+
+        switch (id) {
+            case R.id.swipe_left_button:
+                if (mCurrentPosition > 0) {
+                    mCurrentPosition--;
+                }
+                scroll(mScrollLayout.getChildAt(mCurrentPosition));
+                mViewPager.setCurrentItem(mCurrentPosition);
+                break;
+            case R.id.swipe_right_button:
+                if (mCurrentPosition < mListOfMedia.size() - 1) {
+                    mCurrentPosition++;
+                }
+                mViewPager.setCurrentItem(mCurrentPosition);
+                scroll(mScrollLayout.getChildAt(mCurrentPosition));
+                break;
+        }
+    }
+
+    public void loadFragments() {
+        mFragments = new ArrayList<>();
+        for (String url : mListOfMedia) {
+            ImageCouponFragment fragment = new ImageCouponFragment();
+            fragment.setCouponUrl(url);
+            mFragments.add(fragment);
+        }
+    }
+
     private void loadScrollViewContent() {
         for (int position = 0; position < mListOfMedia.size(); position++) {
             addThumbnail(position);
         }
+        View view = mScrollLayout.getChildAt(mCurrentPosition).findViewById(R.id.cover_button);
+        view.requestFocus();
     }
 
     @Override
@@ -101,9 +147,8 @@ public class CouponFragment extends Fragment implements ViewPager.OnPageChangeLi
     public void onPageSelected(int position) {
         scroll(mScrollLayout.getChildAt(position));
         mCurrentPosition = position;
-        mSwipeLeftButton.setEnabled(mCurrentPosition != 0);
-        mSwipeRightButton.setEnabled(mCurrentPosition != mListOfMedia.size() - 1);
-        Log.d(TAG, "onPageSelected --- current position" + mCurrentPosition);
+        updateSwipeButtonState();
+        Log.d(TAG, "onPageSelected --- current position " + mCurrentPosition);
     }
 
     @Override
@@ -111,6 +156,10 @@ public class CouponFragment extends Fragment implements ViewPager.OnPageChangeLi
 
     }
 
+    public void updateSwipeButtonState() {
+        mSwipeLeftButton.setVisibility((mCurrentPosition != 0) ? View.VISIBLE : View.GONE);
+        mSwipeRightButton.setVisibility((mCurrentPosition != mListOfMedia.size() - 1) ? View.VISIBLE : View.GONE);
+    }
 
     private void addThumbnail(int position) {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(THUMBNAIL_SIZE, THUMBNAIL_SIZE);
@@ -128,17 +177,21 @@ public class CouponFragment extends Fragment implements ViewPager.OnPageChangeLi
         //thumbnailView.setBackgroundResource(R.drawable.thumbnail_background);
         coverButton.setTag(position);//thumbnailView.setTag(position);
         coverButton.setOnClickListener(thumbnailOnClickListener);
+        coverButton.setClickable(true);
+        coverButton.setFocusable(true);
+        coverButton.setFocusableInTouchMode(true);
         thumbnailView.setScaleType(ImageView.ScaleType.FIT_XY);
         Picasso.with(getContext()).load(mListOfMedia.get(position)).into(thumbnailView);
         return view;
     }
 
     private void scroll(View thumbnail) {
+        thumbnail.requestFocus();
         int thumbnailCoords[] = new int[2];
         thumbnail.getLocationOnScreen(thumbnailCoords);
 
-        int thumbnailCenterX = thumbnailCoords[0] + THUMBNAIL_SIZE / 2;
-        int thumbnailDelta = mDisplayProperties.x / 2 - thumbnailCenterX;
+        int thumbnailCenterX = thumbnailCoords[0] + THUMBNAIL_SIZE + 20;
+        int thumbnailDelta = mDisplayProperties.x - thumbnailCenterX;
 
         mScrollView.smoothScrollBy(-thumbnailDelta, 0);
     }
@@ -153,25 +206,5 @@ public class CouponFragment extends Fragment implements ViewPager.OnPageChangeLi
             point.set(display.getWidth(), display.getHeight());
         }
         return point;
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.swipe_left_button:
-                if (mCurrentPosition > 0) {
-                    mCurrentPosition--;
-                }
-                scroll(mScrollLayout.getChildAt(mCurrentPosition));
-                mViewPager.setCurrentItem(mCurrentPosition);
-                break;
-            case R.id.swipe_right_button:
-                if (mCurrentPosition < mListOfMedia.size()-1) {
-                    mCurrentPosition++;
-                }
-                mViewPager.setCurrentItem(mCurrentPosition);
-                scroll(mScrollLayout.getChildAt(mCurrentPosition));
-                break;
-        }
     }
 }
