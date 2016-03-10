@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
@@ -71,6 +72,16 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback,
     private GoogleMap mMap;
     private LocationManager mLocationManager;
 
+    private View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (!hasFocus) {
+                InputMethodManager imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            }
+        }
+    };
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,7 +133,9 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback,
         mAdapter = new SearchOptionAdapter(getContext(), mListGroup, mListChild);
         mListOptionView.setAdapter(mAdapter);
 
+        mSearchBox.setOnFocusChangeListener(focusChangeListener);
         mExpandButton.setOnClickListener(this);
+        mSearchButton.setOnClickListener(this);
 
         mTabLocation.setOnTouchListener(this);
         mTabStore.setOnTouchListener(this);
@@ -158,9 +171,11 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback,
 
     private void selectTab() {
         if (mCurrentTabSelect == TAB_LOCATION) {
+            mSearchBox.setHint("地名・駅名で探す");
             mTabLocation.setChecked(true);
             mTabStore.setChecked(false);
         } else {
+            mSearchBox.setHint("店名で探す");
             mTabLocation.setChecked(false);
             mTabStore.setChecked(true);
         }
@@ -168,9 +183,11 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback,
 
     private void collapseAndExpandView() {
         if (shouldCollapse) {
+            mExpandButton.setImageResource(R.drawable.ic_expand_more_black_24dp);
             mListOptionView.setVisibility(View.GONE);
             mSearchTabLayout.setVisibility(View.GONE);
         } else {
+            mExpandButton.setImageResource(R.drawable.ic_expand_less_black_24dp);
             mListOptionView.setVisibility(View.VISIBLE);
             mSearchTabLayout.setVisibility(View.VISIBLE);
         }
@@ -178,10 +195,14 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback,
 
     @Override
     protected void onViewClick(int id) {
+        View v = mRootView.findViewById(id);
+        v.requestFocus();
         switch (id) {
             case R.id.map_search_expand_button:
                 shouldCollapse = (!shouldCollapse);
                 collapseAndExpandView();
+                break;
+            case R.id.map_search_button:
                 break;
         }
     }
@@ -225,6 +246,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback,
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setPadding(0,120,0,0);
         mMap.setOnCameraChangeListener(this);
         mMap.setOnInfoWindowClickListener(this);
         UiSettings uiSettings = mMap.getUiSettings();
@@ -267,16 +289,15 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback,
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        v.requestFocus();
         switch (v.getId()) {
             case R.id.location_tab:
                 mCurrentTabSelect = TAB_LOCATION;
                 selectTab();
-
                 return true;
             case R.id.store_tab:
                 mCurrentTabSelect = TAB_STORE;
                 selectTab();
-
                 return true;
             default:
                 return false;

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -19,6 +20,7 @@ import java.util.List;
 import jp.co.goga.dennysclone.R;
 import jp.co.goga.dennysclone.adapter.MenuAdapter;
 import jp.co.goga.dennysclone.handler.FragmentHandler;
+import jp.co.goga.dennysclone.item.DennyMenuItem;
 import jp.co.goga.dennysclone.util.Constant;
 
 /**
@@ -70,6 +72,21 @@ public class DennysMenuFragment extends BaseFragment implements PullToRefreshBas
         mListMenuView = mRefreshListView.getRefreshableView();
         mAdapter = new MenuAdapter(getContext(), mDataList);
         mListMenuView.setAdapter(mAdapter);
+        mListMenuView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                FoodDetailFragment fragment = new FoodDetailFragment();
+                int viewType = mAdapter.getItemViewType(position-1);
+                if (viewType == MenuAdapter.ITEM_MENU_ITEM) {
+                    DennyMenuItem item = (DennyMenuItem) mAdapter.getItem(position-1);
+                    Bundle args = new Bundle();
+                    args.putString(FoodDetailFragment.FATHER_FOOD_URL, item.getImageUrl());
+                    args.putString(FoodDetailFragment.FATHER_FOOD_NAME, item.getTitle());
+                    fragment.setArguments(args);
+                    mOpenFragmentListener.openFragment(fragment, false);
+                }
+            }
+        });
     }
 
     @Override

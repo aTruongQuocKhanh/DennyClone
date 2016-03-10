@@ -6,7 +6,9 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.flyco.tablayout.CommonTabLayout;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 import java.util.WeakHashMap;
 
@@ -15,7 +17,7 @@ import java.util.WeakHashMap;
  */
 public class FragmentHandler {
     private static FragmentHandler sInstance;
-    private WeakHashMap<Integer, Stack<Fragment>> mFragmentMap;
+    private Map<Integer, Stack<Fragment>> mFragmentMap;
 
 
     public static FragmentHandler getInstance() {
@@ -30,7 +32,7 @@ public class FragmentHandler {
             return;
         }
         int tabCount = tabLayout.getTabCount();
-        mFragmentMap = new WeakHashMap<>();
+        mFragmentMap = new HashMap<>();
         for (int i = 0; i < tabCount; i++) {
             Stack<Fragment> fragmentStack = new Stack<Fragment>();
             fragmentStack.push(fragments.get(i));

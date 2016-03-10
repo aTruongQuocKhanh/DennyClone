@@ -1,4 +1,4 @@
-package jp.co.goga.dennysclone;
+package jp.co.goga.dennysclone.util;
 
 import android.app.Activity;
 import android.app.Dialog;

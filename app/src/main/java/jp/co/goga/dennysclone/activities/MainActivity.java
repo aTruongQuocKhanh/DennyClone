@@ -1,11 +1,10 @@
-package jp.co.goga.dennysclone;
+package jp.co.goga.dennysclone.activities;
 
 import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
 
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
@@ -13,7 +12,8 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 
 import java.util.ArrayList;
 
-import jp.co.goga.dennysclone.adapter.CouponAdapter;
+import jp.co.goga.dennysclone.util.DialogManager;
+import jp.co.goga.dennysclone.R;
 import jp.co.goga.dennysclone.entity.TabEntity;
 import jp.co.goga.dennysclone.fragments.CouponFragment;
 import jp.co.goga.dennysclone.fragments.HomeFragment;
@@ -106,5 +106,11 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
                 }
             }).show();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mFragmentHandler.recycle();
     }
 }

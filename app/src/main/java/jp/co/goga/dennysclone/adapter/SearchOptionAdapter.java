@@ -69,7 +69,7 @@ public class SearchOptionAdapter implements ExpandableListAdapter {
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return groupPosition<<childPosition;
+        return groupPosition << childPosition;
     }
 
     @Override
@@ -93,36 +93,18 @@ public class SearchOptionAdapter implements ExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         View mRootView = convertView;
-        switch (groupPosition) {
-            case 0:
-                if (mRootView == null) {
-                    LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    mRootView = inflater.inflate(R.layout.map_list_option_group_item, parent, false);
-                }
-
-                MapSearchOptionItem item = (MapSearchOptionItem) mChildList.get(mGroupList.get(groupPosition)).get(childPosition);
-                ImageView iconView = (ImageView) mRootView.findViewById(R.id.option_icon_imageview);
-                Switch switchView = (Switch) mRootView.findViewById(R.id.option_switch);
-                if (item.getIconUrl() != null) {
-                    Picasso.with(mContext).load(item.getIconUrl()).into(iconView);
-                }
-                switchView.setText(item.getName());
-                break;
-            case 1:
-                if (mRootView == null) {
-                    LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    mRootView = inflater.inflate(R.layout.map_list_option_group_item, parent, false);
-                }
-
-                MapSearchOptionItem item1 = (MapSearchOptionItem) mChildList.get(mGroupList.get(groupPosition)).get(childPosition);
-                ImageView iconView1 = (ImageView) mRootView.findViewById(R.id.option_icon_imageview);
-                Switch switchView1 = (Switch) mRootView.findViewById(R.id.option_switch);
-                if (item1.getIconUrl() != null) {
-                    Picasso.with(mContext).load(item1.getIconUrl()).into(iconView1);
-                }
-                switchView1.setText(item1.getName());
-                break;
+        if (mRootView == null) {
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            mRootView = inflater.inflate(R.layout.map_list_option_child_item, parent, false);
         }
+
+        MapSearchOptionItem item = (MapSearchOptionItem) mChildList.get(mGroupList.get(groupPosition)).get(childPosition);
+        ImageView iconView = (ImageView) mRootView.findViewById(R.id.option_icon_imageview);
+        Switch switchView = (Switch) mRootView.findViewById(R.id.option_switch);
+        if (item.getIconUrl() != null) {
+            Picasso.with(mContext).load(item.getIconUrl()).into(iconView);
+        }
+        switchView.setText(item.getName());
         return mRootView;
     }
 

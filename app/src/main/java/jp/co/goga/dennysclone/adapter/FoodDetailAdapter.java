@@ -15,17 +15,18 @@ import java.util.List;
 
 import jp.co.goga.dennysclone.R;
 import jp.co.goga.dennysclone.item.DennyMenuItem;
+import jp.co.goga.dennysclone.item.FoodItem;
 
 /**
- * Created by khanhtq on 3/4/16.
+ * Created by khanhtq on 3/10/16.
  */
-public class MenuAdapter extends BaseAdapter {
+public class FoodDetailAdapter extends BaseAdapter {
     private Context mContext;
     private List<Object> mDataList;
-    public static final int ITEM_MENU_GROUP = 0;
-    public static final int ITEM_MENU_ITEM = 1;
+    private static final int ITEM_FATHER_FOOD = 0;
+    private static final int ITEM_FOOD = 1;
 
-    public MenuAdapter(Context context, List<Object> dataList) {
+    public FoodDetailAdapter(Context context, List<Object> dataList) {
         mContext = context;
         mDataList = dataList;
     }
@@ -53,15 +54,15 @@ public class MenuAdapter extends BaseAdapter {
         MenuHolder holder;
         if (mRootView == null) {
             holder = new MenuHolder();
-            if (viewType == ITEM_MENU_GROUP) {
+            if (viewType == ITEM_FOOD) {
                 LayoutInflater vi = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                mRootView = vi.inflate(R.layout.menu_group_title_item, parent, false);
-                holder.mGroupName = (TextView) mRootView.findViewById(R.id.menu_group_title_textview);
+                mRootView = vi.inflate(R.layout.food_item, parent, false);
+                holder.mFoodImage = (ImageView) mRootView.findViewById(R.id.food_image);
             } else {
                 LayoutInflater vi = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                mRootView = vi.inflate(R.layout.menu_item, parent, false);
-                holder.mMenuIcon = (ImageView) mRootView.findViewById(R.id.menu_item_imageview);
-                holder.mMenuTitle = (TextView) mRootView.findViewById(R.id.menu_item_title_textview);
+                mRootView = vi.inflate(R.layout.father_food_item, parent, false);
+                holder.mFatherFoodImageView = (ImageView) mRootView.findViewById(R.id.father_food_imageview);
+                holder.mFatherFoodTitle = (TextView) mRootView.findViewById(R.id.father_food_textview);
             }
             mRootView.setTag(holder);
         } else {
@@ -70,11 +71,11 @@ public class MenuAdapter extends BaseAdapter {
         }
         Object object = getItem(position);
         if (object != null) {
-            if (viewType == ITEM_MENU_GROUP) {
-                holder.mGroupName.setText((String) object);
+            if (viewType == ITEM_FOOD) {
+                Picasso.with(mContext).load(((FoodItem) object).getImageUrl()).into(holder.mFoodImage);
             } else {
-                holder.mMenuTitle.setText(((DennyMenuItem)object).getTitle());
-                Picasso.with(mContext).load(((DennyMenuItem)object).getImageUrl()).into(holder.mMenuIcon);
+                holder.mFatherFoodTitle.setText(((DennyMenuItem) object).getTitle());
+                Picasso.with(mContext).load(((DennyMenuItem) object).getImageUrl()).into(holder.mFatherFoodImageView);
             }
         }
         return mRootView;
@@ -83,17 +84,11 @@ public class MenuAdapter extends BaseAdapter {
     @Override
     public int getItemViewType(int position) {
         Object item = getItem(position);
-        if (item instanceof String) {
-            return ITEM_MENU_GROUP;
-        } else{
-            return ITEM_MENU_ITEM;
+        if (item instanceof DennyMenuItem) {
+            return ITEM_FATHER_FOOD;
+        } else {
+            return ITEM_FOOD;
         }
-    }
-
-    @Override
-    public boolean isEnabled(int position) {
-        int viewType = getItemViewType(position);
-        return viewType == ITEM_MENU_ITEM;
     }
 
     @Override
@@ -102,8 +97,8 @@ public class MenuAdapter extends BaseAdapter {
     }
 
     private class MenuHolder {
-        ImageView mMenuIcon;
-        TextView mMenuTitle;
-        TextView mGroupName;
+        ImageView mFatherFoodImageView;
+        TextView mFatherFoodTitle;
+        ImageView mFoodImage;
     }
 }

@@ -2,6 +2,7 @@ package jp.co.goga.dennysclone.util;
 
 import jp.co.goga.dennysclone.R;
 import jp.co.goga.dennysclone.item.DennyMenuItem;
+import jp.co.goga.dennysclone.item.FoodItem;
 import jp.co.goga.dennysclone.item.HomeNewsItem;
 import jp.co.goga.dennysclone.item.HomeSliderItem;
 import jp.co.goga.dennysclone.item.MapSearchOptionItem;
@@ -90,13 +91,23 @@ public class Constant {
     };
 
     public static final MapSearchOptionItem[] MAP_SEARCH_OPTION_ITEMS = {
-            new MapSearchOptionItem("http://www.dennys.jp/images/shop/detail/web_44_1_24.gif","24時間営業"),
-            new MapSearchOptionItem("http://www.dennys.jp/images/shop/detail/web_44_2_slope.gif","入り口段差なしまたはエレベーターあり"),
-            new MapSearchOptionItem("http://www.dennys.jp/images/shop/detail/web_44_3_anyone.gif","多目的トイレ"),
-            new MapSearchOptionItem("http://www.dennys.jp/images/shop/detail/web_44_4_baby.gif","オムツ替えシート"),
-            new MapSearchOptionItem("http://www.dennys.jp/images/shop/detail/web_44_5_parking.gif","駐車場あり"),
-            new MapSearchOptionItem("http://www.dennys.jp/images/shop/detail/web_44_6_separate.gif","分煙対応"),
-            new MapSearchOptionItem("http://www.dennys.jp/images/shop/detail/web_44_7_nonsmoke.gif","全席禁煙"),
-            new MapSearchOptionItem("http://www.dennys.jp/images/shop/detail/web_44_8_party.gif","パーティールームまたは個室あり"),
+            new MapSearchOptionItem("24時間営業","http://www.dennys.jp/images/shop/detail/web_44_1_24.gif"),
+            new MapSearchOptionItem("入り口段差なしまたはエレベーターあり","http://www.dennys.jp/images/shop/detail/web_44_2_slope.gif"),
+            new MapSearchOptionItem("多目的トイレ","http://www.dennys.jp/images/shop/detail/web_44_3_anyone.gif"),
+            new MapSearchOptionItem("オムツ替えシート","http://www.dennys.jp/images/shop/detail/web_44_4_baby.gif"),
+            new MapSearchOptionItem("駐車場あり","http://www.dennys.jp/images/shop/detail/web_44_5_parking.gif"),
+            new MapSearchOptionItem("分煙対応","http://www.dennys.jp/images/shop/detail/web_44_6_separate.gif"),
+            new MapSearchOptionItem("全席禁煙","http://www.dennys.jp/images/shop/detail/web_44_7_nonsmoke.gif"),
+            new MapSearchOptionItem("パーティールームまたは個室あり","http://www.dennys.jp/images/shop/detail/web_44_8_party.gif"),
+    };
+
+    public static final FoodItem[] FOOD_ITEMS = {
+            new FoodItem("http://www.dennys.jp/images/menu/abocado-hamburg-s.jpg"),
+            new FoodItem("http://www.dennys.jp/images/menu/abocado-hamburg-s.jpg"),
+            new FoodItem("http://www.dennys.jp/images/menu/abocado-hamburg-s.jpg"),
+            new FoodItem("http://www.dennys.jp/images/menu/abocado-hamburg-s.jpg"),
+            new FoodItem("http://www.dennys.jp/images/menu/abocado-hamburg-s.jpg"),
+            new FoodItem("http://www.dennys.jp/images/menu/abocado-hamburg-s.jpg"),
+            new FoodItem("http://www.dennys.jp/images/menu/abocado-hamburg-s.jpg"),
     };
 }

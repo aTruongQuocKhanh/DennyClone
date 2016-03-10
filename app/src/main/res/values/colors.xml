@@ -3,7 +3,7 @@
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorWhiteTransparent">#AAFFFFFF</color>
     <color name="colorPrimaryDark">#ffe699</color>
-    <color name="colorPrimaryDarkTransparent">#aaffe699</color>
+    <color name="colorPrimaryDarkTransparent">#aaf2f2e4</color>
     <color name="colorAccent">#e60000</color>
     <color name="colorAccentTransparent">#99e60000</color>
     <color name="colorTitleBar">#ee0000</color>
@@ -16,4 +16,5 @@
     <color name="colorHalfGray">#d9d9d9</color>
     <color name="colorMapSearchTabUnSelect">#595959</color>
     <color name="colorDark">#000</color>
+    <color name="colorOrangeLight">#ff6600</color>
 </resources>

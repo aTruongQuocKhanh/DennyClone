@@ -21,5 +21,8 @@
     <string name="user">マイページ</string>
     <string name="map">店舗検索</string>
 
+    <string name="text_link_login"><u>パスワードを忘れた方はこちら</u></string>
+    <string name="login_copyright">COPYRIGHT \u00a9 Seven &amp; i Food Systems co.,Ltd. \n All Right reserved</string>
+
     <string name="google_maps_api_key">AIzaSyBFVEr3kESvLZfsDV65RjGWwb72_rJdLqE</string>
 </resources>

@@ -1,15 +1,6 @@
 package jp.co.goga.dennysclone.fragments;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -18,9 +9,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
-import jp.co.goga.dennysclone.DialogManager;
 import jp.co.goga.dennysclone.R;
 import jp.co.goga.dennysclone.adapter.ActionAdapter;
 import jp.co.goga.dennysclone.handler.FragmentHandler;

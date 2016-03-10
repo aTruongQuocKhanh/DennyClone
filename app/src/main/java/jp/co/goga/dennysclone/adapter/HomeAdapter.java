@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import jp.co.goga.dennysclone.R;
-import jp.co.goga.dennysclone.fragments.DennysMenuFragment;
+import jp.co.goga.dennysclone.fragments.FoodDetailFragment;
 import jp.co.goga.dennysclone.handler.FragmentHandler;
 import jp.co.goga.dennysclone.item.HomeNewsItem;
 import jp.co.goga.dennysclone.item.HomeSliderItem;
@@ -113,7 +113,8 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             @Override
                             public void onSliderClick(BaseSliderView slider) {
                                 if (mOpenFragmentListener != null) {
-                                    mOpenFragmentListener.openFragment(new DennysMenuFragment(), false);
+                                    FoodDetailFragment fragment = new FoodDetailFragment();
+                                    mOpenFragmentListener.openFragment(fragment, false);
                                 }
                             }
                         });
@@ -138,6 +139,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             holder.newsTime.setText(news.getDate());
             holder.newsTitle.setText(news.getTitle());
         }
+        holder.bindClick(mOpenFragmentListener, news);
     }
 
     @Override
@@ -166,15 +168,33 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     private class NewsHolder extends RecyclerView.ViewHolder {
+        View rootView;
         ImageView newsImage;
         TextView newsTime;
         TextView newsTitle;
 
         public NewsHolder(View itemView) {
             super(itemView);
+            rootView = itemView;
             newsImage = (ImageView) itemView.findViewById(R.id.home_news_imageview);
             newsTime = (TextView) itemView.findViewById(R.id.home_news_day_textview);
             newsTitle = (TextView) itemView.findViewById(R.id.home_news_title_textview);
+        }
+
+        public void bindClick(FragmentHandler.OpenFragmentMethods listener, HomeNewsItem news) {
+            final FragmentHandler.OpenFragmentMethods mListener = listener;
+            final HomeNewsItem homeNewsItem = news;
+            rootView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FoodDetailFragment fragment = new FoodDetailFragment();
+                    Bundle args = new Bundle();
+                    args.putString(FoodDetailFragment.FATHER_FOOD_URL, homeNewsItem.getImageUrl());
+                    args.putString(FoodDetailFragment.FATHER_FOOD_NAME, homeNewsItem.getTitle());
+                    fragment.setArguments(args);
+                    mListener.openFragment(fragment, false);
+                }
+            });
         }
     }
 
